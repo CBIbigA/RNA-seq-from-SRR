@@ -12,16 +12,3 @@ rule sra_getfastq:
 	script:"../scripts/SRR.py"
 		
 
-
-def getAccesion(wildcards):
-	return("RAW/{}_{}.{}".format(README[wildcards.prefix],wildcards.read,SAMPLEEXT))
-
-rule rename_file:
-	output:
-		"RAW/{prefix}_{read}"+SAMPLEEXT
-	input:
-		getAccesion
-	shell:
-		"mv {input} {output}"
-
-ruleorder: sra_getfastq > rename_file

@@ -25,13 +25,19 @@ rule star_index_gtf:
 		" --sjdbOverhang {params.splice_junction_overhang}"
 
 
+
+
+def getAccesion(wildcards):
+	return(["RAW/{}_{}.{}".format(README[wildcards.sample],R12,SAMPLEEXT) for R12 in ["_1","_2"]])
+
+
+
 rule star_aln_quant:
 	output:
 		SAMPLEOUT+"/mapping/sam/{sample}/{sample}_Aligned.out.sam",
 		SAMPLEOUT+"/mapping/sam/{sample}/{sample}_ReadsPerGene.out.tab"
 	input:
-		fastq1 = "RAW/{sample}_1"+SAMPLEEXT,
-		fastq2 = "RAW/{sample}_2"+SAMPLEEXT,
+		getAccesion,
 		index = GENDIR+"chrName.txt"
 	params:
 		readFilesCommand = STAR_OPT["readFilesCommand"],
@@ -53,7 +59,7 @@ rule star_aln_quant:
 		" {params.readFilesCommand}"
 		" --genomeDir {params.genomeDir}"
 		" --runThreadN {threads}"
-		" --readFilesIn {input.fastq1} {input.fastq2}"
+		" --readFilesIn {snakemake.input[0]} {snakemake.input[1]}"
 		" --outFileNamePrefix {params.prefix}"
 		" --quantMode GeneCounts"
 
