@@ -23,3 +23,5 @@ rule rename_file:
 		getAccesion
 	shell:
 		"mv {input} {output}"
+
+ruleorder: sra_getfastq > rename_file
