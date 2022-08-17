@@ -30,7 +30,7 @@ rule samtools_sort:
 		protected(SAMPLEOUT+"/mapping/bam/sorted/{prefix}.sorted.bam")
 	benchmark :
 		SAMPLEOUT+"/benchmarks/samtools_sort/{prefix}.txt"
-	conda: "envs/samtools.yaml"
+	conda: "../envs/samtools.yaml"
         priority: 50
         threads: THREADS["samtools"]
 	message: "##RUNNING : samtools sort {input.bam}"
@@ -46,7 +46,7 @@ rule samtools_index_sorted:
 		protected(SAMPLEOUT+"/mapping/bam/sorted/{prefix}.sorted.bai")
 	benchmark :
 		SAMPLEOUT+"/benchmarks/samtools_index_sorted/{prefix}.txt"
-	conda:"envs/samtools.yaml"
+	conda:"../envs/samtools.yaml"
         priority: 50
         threads: THREADS["samtools"]
 	message: "##RUNNING : samtools index {input}"
@@ -64,7 +64,7 @@ rule samtools_faidx:
 		genome=GENOME+".fai"
 	benchmark:
 		SAMPLEOUT+"/benchmarks/samtools_faidx/samtools_faidx.txt"
-	conda: "envs/samtools.yaml"
+	conda: "../envs/samtools.yaml"
 	priority:50
 	message: "##RUNNING : samtools faidx for {input.genome}"
 	shell:

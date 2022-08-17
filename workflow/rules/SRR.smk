@@ -6,7 +6,7 @@ rule sra_getfastq:
 		name = "{accession}"
 	benchmark: SAMPLEOUT+"/benchmarks/fastqdump/{accession}.benchmark.txt"
 	conda:
-		"envs/sra-tools.yaml"
+		"../envs/sra-tools.yaml"
 	threads:
 		THREADS["SRR"]
 	script:"scripts/SRR.py"

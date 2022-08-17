@@ -13,7 +13,7 @@ rule star_index_gtf:
 		THREADS["index"]
 	benchmark: SAMPLEOUT+"/benchmarks/star_index_gtf/{input.fasta}.benchmark.txt"
 	conda:
-		"envs/star.yaml"
+		"../envs/star.yaml"
 	message: "Indexing with STAR for {input.fasta} with annotation : {input.gtf}"
 	shell:
 		"STAR"
@@ -44,7 +44,7 @@ rule star_aln_quant:
 		THREADS["aln"]
 	benchmark: SAMPLEOUT+"/benchmarks/star_aln/{sample}.benchmark.txt"
 	conda:
-		"envs/star.yaml"
+		"../envs/star.yaml"
 	message: "STAR aln for {params.name}"
 	shell:
 		"STAR"
