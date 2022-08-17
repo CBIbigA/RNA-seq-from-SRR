@@ -1,0 +1,38 @@
+import pandas as pd
+configfile: "config/config.yaml"
+#GENERAL
+SAMPLEOUT = config["general"]["sampleout"]
+THREADS = config["general"]["threads"]
+#GENOME AND GTF
+GTF = config["genome"]["gtf"]
+GENDIR = config["genome"]["dir"]
+GENNAME = config["genome"]["name"]
+GENEXT = config["genome"]["ext"]
+GENOME = GENDIR+GENNAME+GENEXT
+#FASTQ
+SAMPLEEXT = config["raw_spec"]["ext"]
+#STAR PARAMETERS
+STAR_OPT = config["star"]
+#SAMTOOLS
+SAMTOOLS_OPT = config["samtools"]
+README_file = config["general"]["files_info"]
+
+README = pd.read_table("file_specs.txt").set_index("Sample Name", drop=False)
+
+README = README["Run"].to_dict()
+
+SAMPLES = README.keys()
+
+
+include:"rules/SRR.smk"
+include:"rules/STAR_quant.smk"
+include:"rules/samtools.smk"
+
+
+#ALL
+rule all:
+	input:
+		expand(SAMPLEOUT+"/mapping/bam/{sample}.sorted.bai",sample=SAMPLES),
+		expand(SAMPLEOUT+"/mapping/counts/STAR/{sample}_counts.tsv",sample=SAMPLES)
+
+
