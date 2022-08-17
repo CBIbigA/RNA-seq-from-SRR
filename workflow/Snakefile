@@ -30,7 +30,8 @@ include:"rules/samtools.smk"
 
 
 wildcard_constraints:
-   prefix="\w+"
+   prefix="\w+",
+   accession="SRR\w+"
 
 #ALL
 rule all:
