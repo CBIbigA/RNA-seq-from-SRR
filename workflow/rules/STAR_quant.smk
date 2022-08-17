@@ -59,7 +59,7 @@ rule star_aln_quant:
 		" {params.readFilesCommand}"
 		" --genomeDir {params.genomeDir}"
 		" --runThreadN {threads}"
-		" --readFilesIn {snakemake.input[0]} {snakemake.input[1]}"
+		" --readFilesIn {input[0]} {input[1]}"
 		" --outFileNamePrefix {params.prefix}"
 		" --quantMode GeneCounts"
 
