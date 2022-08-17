@@ -63,7 +63,5 @@ rule cp_STAR_quant_to_counts:
 	priority:50
 	message: "Copy {input} to {output}"
 	benchmark:SAMPLEOUT+"/benchmarks/cp_STAR_quant_to_counts/{sample}.benchmark.txt"
-	conda:
-		"envs/pipeline.yaml"
 	shell:"cp {input} {output}"
 
