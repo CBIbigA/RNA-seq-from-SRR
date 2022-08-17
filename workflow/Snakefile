@@ -29,6 +29,9 @@ include:"rules/STAR_quant.smk"
 include:"rules/samtools.smk"
 
 
+wildcard_constraints:
+    dataset="\w+"
+
 #ALL
 rule all:
 	input:
