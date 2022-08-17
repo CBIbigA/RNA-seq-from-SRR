@@ -10,7 +10,7 @@ rule sam_to_bam:
 	benchmark :
 		SAMPLEOUT+"/benchmarks/sam_to_bam/{prefix}.txt"
 	conda:
-		"envs/samtools.yaml"
+		"../envs/samtools.yaml"
 	priority: 50
 	threads: THREADS["samtools"]
 	message: "##RUNNING : samtools view for {input.sam}"
