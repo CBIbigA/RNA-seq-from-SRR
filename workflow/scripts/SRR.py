@@ -1,8 +1,6 @@
 import os
 import tempfile
 from snakemake.shell import shell
-from snakemake_wrapper_utils.snakemake import get_mem
-
 
 # Outdir
 outdir = os.path.dirname(snakemake.output[0])
