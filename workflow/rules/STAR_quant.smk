@@ -30,8 +30,8 @@ rule star_aln_quant:
 		SAMPLEOUT+"/mapping/sam/{sample}/{sample}_Aligned.out.sam",
 		SAMPLEOUT+"/mapping/sam/{sample}/{sample}_ReadsPerGene.out.tab"
 	input:
-		fastq1 = "RAW/{accession}_1"+SAMPLEEXT,
-		fastq2 = "RAW/{accession}_2"+SAMPLEEXT,
+		fastq1 = "RAW/{sample}_1"+SAMPLEEXT,
+		fastq2 = "RAW/{sample}_2"+SAMPLEEXT,
 		index = GENDIR+"chrName.txt"
 	params:
 		readFilesCommand = STAR_OPT["readFilesCommand"],
