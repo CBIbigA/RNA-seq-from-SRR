@@ -7,6 +7,7 @@ outdir = os.path.dirname(snakemake.output[0])
 if outdir:
 	outdir = f"--outdir {outdir}"
 extra = snakemake.params.get("extra", "")
+compress = ""
 for output in snakemake.output:
 	out_name, out_ext = os.path.splitext(output)
 	if out_ext == ".gz":
