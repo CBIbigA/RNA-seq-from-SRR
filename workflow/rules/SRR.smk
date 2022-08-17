@@ -9,7 +9,7 @@ rule sra_getfastq:
 		"../envs/sra-tools.yaml"
 	threads:
 		THREADS["SRR"]
-	script:"scripts/SRR.py"
+	script:"../scripts/SRR.py"
 		
 
 
