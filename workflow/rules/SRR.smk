@@ -14,7 +14,7 @@ rule sra_getfastq:
 
 
 def getAccesion(wildcards):
-	return(README[wildcards.prefix])
+	return("RAW/{}_{}.{}".format(README[wildcards.prefix],wildcards.read,SAMPLEEXT))
 
 rule rename_file:
 	output:
