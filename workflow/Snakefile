@@ -32,7 +32,7 @@ include:"rules/samtools.smk"
 #ALL
 rule all:
 	input:
-		expand(SAMPLEOUT+"/mapping/bam/{sample}.sorted.bai",sample=SAMPLES),
+		expand(SAMPLEOUT+"/mapping/bam/sorted/{sample}.sorted.bai",sample=SAMPLES),
 		expand(SAMPLEOUT+"/mapping/counts/STAR/{sample}_counts.tsv",sample=SAMPLES)
 
 

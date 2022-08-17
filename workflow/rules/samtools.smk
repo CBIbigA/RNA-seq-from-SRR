@@ -27,7 +27,7 @@ rule samtools_sort:
 	input:
 		bam=SAMPLEOUT+"/mapping/bam/{prefix}.bam"
 	output:
-		protected(SAMPLEOUT+"/mapping/bam/{prefix}.sorted.bam")
+		protected(SAMPLEOUT+"/mapping/bam/sorted/{prefix}.sorted.bam")
 	benchmark :
 		SAMPLEOUT+"/benchmarks/samtools_sort/{prefix}.txt"
 	conda: "envs/samtools.yaml"
@@ -41,9 +41,9 @@ rule samtools_sort:
 
 rule samtools_index_sorted:
 	input:
-		bam=SAMPLEOUT+"/mapping/bam/{prefix}.sorted.bam"
+		bam=SAMPLEOUT+"/mapping/bam/sorted/{prefix}.sorted.bam"
 	output:
-		protected(SAMPLEOUT+"/mapping/bam/{prefix}.sorted.bai")
+		protected(SAMPLEOUT+"/mapping/bam/sorted/{prefix}.sorted.bai")
 	benchmark :
 		SAMPLEOUT+"/benchmarks/samtools_index_sorted/{prefix}.txt"
 	conda:"envs/samtools.yaml"
