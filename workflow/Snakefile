@@ -17,7 +17,7 @@ STAR_OPT = config["star"]
 SAMTOOLS_OPT = config["samtools"]
 README_file = config["general"]["files_info"]
 
-README = pd.read_table("file_specs.txt").set_index("Sample Name", drop=False)
+README = pd.read_table(README_file).set_index("Sample Name", drop=False)
 
 README = README["Run"].to_dict()
 
