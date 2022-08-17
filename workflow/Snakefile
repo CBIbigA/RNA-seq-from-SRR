@@ -30,7 +30,7 @@ include:"rules/samtools.smk"
 
 
 wildcard_constraints:
-    dataset="\w+"
+   prefix="\w+"
 
 #ALL
 rule all:
