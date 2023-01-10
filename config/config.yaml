@@ -1,4 +1,6 @@
 general:
+  from_geo: false
+  rawdir: "../trimmed"
   files_info: "config/file_specs.txt"
   sampleout: "PROCESSED_RNA_SEQ"
   threads:
@@ -6,6 +8,7 @@ general:
     aln: 12
     index: 12
     samtools: 12
+    bigwig: 12
 genome:
   dir: "/DATA2/bioinfo_bigA/teamMattout/ce11/"
   name: "ce11"
@@ -13,9 +16,12 @@ genome:
   gtf: "/DATA2/bioinfo_bigA/teamMattout/ce11/Caenorhabditis_elegans.WBcel235.105_proper_name.gtf"
 raw_spec:
   ext: ".fastq.gz"
+  R12: 
+        - "L001_R1"
+        - "L001_R2minus3"
 star:
   custom: ""
-  reads_length: 74
+  reads_length: 149
   readFilesCommand: "--readFilesCommand gunzip -c"
 samtools:
     quality: 25

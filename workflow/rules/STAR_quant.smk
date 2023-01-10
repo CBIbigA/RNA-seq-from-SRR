@@ -28,7 +28,7 @@ rule star_index_gtf:
 
 
 def getAccesion(wildcards):
-	return(["RAW/{}_{}{}".format(README[wildcards.sample],R12,SAMPLEEXT) for R12 in ["1","2"]])
+	return(["{}/{}_{}{}".format(INDIR,README[wildcards.sample],one,SAMPLEEXT) for one in R12])
 
 
 

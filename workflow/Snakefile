@@ -1,6 +1,7 @@
 import pandas as pd
 configfile: "config/config.yaml"
 #GENERAL
+INDIR = config["general"]["rawdir"]
 SAMPLEOUT = config["general"]["sampleout"]
 THREADS = config["general"]["threads"]
 #GENOME AND GTF
@@ -11,6 +12,7 @@ GENEXT = config["genome"]["ext"]
 GENOME = GENDIR+GENNAME+GENEXT
 #FASTQ
 SAMPLEEXT = config["raw_spec"]["ext"]
+R12 = config["raw_spec"]["R12"]
 #STAR PARAMETERS
 STAR_OPT = config["star"]
 #SAMTOOLS
@@ -27,16 +29,16 @@ SAMPLES = README.keys()
 include:"rules/SRR.smk"
 include:"rules/STAR_quant.smk"
 include:"rules/samtools.smk"
-
+include:"rules/bamcoverage.smk"
 
 wildcard_constraints:
-   prefix="\w+",
-   accession="SRR\w+"
+   accession="SRR\w+",
+   prefix="[\w\-_]+"
 
 #ALL
 rule all:
 	input:
-		expand(SAMPLEOUT+"/mapping/bam/sorted/{sample}.sorted.bai",sample=SAMPLES),
+		expand(SAMPLEOUT+"/mapping/BIGWIG/{sample}_{type}.bw",sample = SAMPLES,type = ["normalized_positive_strand","normalized_negative_strand","normalized"]),
 		expand(SAMPLEOUT+"/mapping/counts/STAR/{sample}_counts.tsv",sample=SAMPLES)
 
 

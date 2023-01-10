@@ -1,7 +1,7 @@
 rule sra_getfastq:
 	output:
-		"RAW/{accession}_1"+SAMPLEEXT,
-		"RAW/{accession}_2"+SAMPLEEXT,
+		INDIR+"/{accession}_1"+SAMPLEEXT,
+		INDIR+"/{accession}_2"+SAMPLEEXT,
 	params:
 		name = "{accession}"
 	benchmark: SAMPLEOUT+"/benchmarks/fastqdump/{accession}.benchmark.txt"
