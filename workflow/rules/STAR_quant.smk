@@ -52,9 +52,11 @@ rule unload_genome:
 		idx= SAMPLEOUT+"/mapping/sam/loading.done",
 	output:
 		temp("logs/STARunload_Log.out")
+	params:
+		genomeDir = GENDIR
 	shell:
 		"STAR --genomeLoad Remove "
-		"--genomeDir {input.genomeDir} "
+		"--genomeDir {params.genomeDir} "
 		"--outFileNamePrefix logs/STARunload_ "
 		"rm {input.idx}"
 
