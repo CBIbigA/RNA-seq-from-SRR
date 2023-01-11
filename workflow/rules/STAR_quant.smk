@@ -39,7 +39,9 @@ rule star_load_genome:
 	output:
 		touch(SAMPLEOUT+"/mapping/sam/loading.done")
 	params:
-		genomeDir = GENDIR,
+		genomeDir = GENDIR
+	conda:
+		"../envs/star.yaml"
 	shell:
 		"STAR --genomeLoad LoadAndExit --genomeDir {params.genomeDir}"
 
@@ -54,6 +56,8 @@ rule unload_genome:
 		temp("logs/STARunload_Log.out")
 	params:
 		genomeDir = GENDIR
+	conda:
+		"../envs/star.yaml"
 	shell:
 		"STAR --genomeLoad Remove "
 		"--genomeDir {params.genomeDir} "
