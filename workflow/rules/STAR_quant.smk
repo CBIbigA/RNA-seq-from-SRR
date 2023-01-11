@@ -32,13 +32,41 @@ def getAccesion(wildcards):
 
 
 
+
+rule star_load_genome:
+	input:
+		GENDIR+"chrName.txt"
+	output:
+		touch(SAMPLEOUT+"/mapping/sam/loading.done")
+	params:
+		genomeDir = GENDIR,
+	shell:
+		"STAR --genomeLoad LoadAndExit --genomeDir {params.genomeDir}"
+
+rule unload_genome:
+	# Delete the loading.done flag file otherwise subsequent runs of the pipeline 
+	# will fail to load the genome again if STAR alignment is needed.
+	input:
+		# Generic function that aggregates all alignment outputs
+		bams= expand(SAMPLEOUT+"/mapping/sam/{sample}/{sample}_Aligned.out.sam",sample = SAMPLES),
+		idx= SAMPLEOUT+"/mapping/sam/loading.done",
+	output:
+		"logs/STARunload_Log.out"
+	shell:
+		"STAR --genomeLoad Remove "
+		"--genomeDir {input.genomeDir} "
+		"--outFileNamePrefix logs/STARunload_ "
+		"rm {input.idx}"
+
+
 rule star_aln_quant:
 	output:
 		SAMPLEOUT+"/mapping/sam/{sample}/{sample}_Aligned.out.sam",
 		SAMPLEOUT+"/mapping/sam/{sample}/{sample}_ReadsPerGene.out.tab"
 	input:
 		getAccesion,
-		index = GENDIR+"chrName.txt"
+		index = GENDIR+"chrName.txt",
+		idx=SAMPLEOUT+"/mapping/sam/loading.done"
 	params:
 		readFilesCommand = STAR_OPT["readFilesCommand"],
 		genomeDir = GENDIR,
@@ -55,7 +83,7 @@ rule star_aln_quant:
 	shell:
 		"STAR"
 		" {params.supp}"
-		" --genomeLoad NoSharedMemory"
+		" --genomeLoad LoadAndKeep"
 		" {params.readFilesCommand}"
 		" --genomeDir {params.genomeDir}"
 		" --runThreadN {threads}"
