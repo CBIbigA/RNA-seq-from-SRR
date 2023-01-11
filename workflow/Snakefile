@@ -39,6 +39,7 @@ wildcard_constraints:
 rule all:
 	input:
 		expand(SAMPLEOUT+"/mapping/BIGWIG/{sample}_{type}.bw",sample = SAMPLES,type = ["normalized_positive_strand","normalized_negative_strand","normalized"]),
-		expand(SAMPLEOUT+"/mapping/counts/STAR/{sample}_counts.tsv",sample=SAMPLES)
+		expand(SAMPLEOUT+"/mapping/counts/STAR/{sample}_counts.tsv",sample=SAMPLES),
+		"logs/STARunload_Log.out"
 
 

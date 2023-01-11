@@ -51,7 +51,7 @@ rule unload_genome:
 		bams= expand(SAMPLEOUT+"/mapping/sam/{sample}/{sample}_Aligned.out.sam",sample = SAMPLES),
 		idx= SAMPLEOUT+"/mapping/sam/loading.done",
 	output:
-		"logs/STARunload_Log.out"
+		temp("logs/STARunload_Log.out")
 	shell:
 		"STAR --genomeLoad Remove "
 		"--genomeDir {input.genomeDir} "
